@@ -1,0 +1,8 @@
+This is a Kohana (3.x) module which providers a wrapper for wkhtmltopdf:
+http://code.google.com/p/wkhtmltopdf/
+
+Basic usage to force a file download:
+wkhtml::topdf($html_content, 'downloaded_file_name.pdf');
+
+Or to get the PDF file contents:
+$pdf_content = wkhtml::topdf($html_content);
