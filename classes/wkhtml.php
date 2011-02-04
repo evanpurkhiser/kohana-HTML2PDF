@@ -42,7 +42,7 @@ class Wkhtml
         if ($download) {
             $filename = (is_string($download)) ? $download : 'print.pdf';
             
-            Request::instance()->send_file($file_out, $filename);
+            Request::current()->response()->send_file($file_out, $filename);
         }
         
         return $file_out;
