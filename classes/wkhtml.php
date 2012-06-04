@@ -1,50 +1,79 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.');
-/**
- * @author     Rowan Parker
- */
-class Wkhtml
-{
-    static public function topdf($data, $download = FALSE)
-    {
-        $bin = Kohana::$config->load('wkhtml.paths.bin');
+<?php
 
-        if ( ! file_exists($bin)) {
-            throw new Kohana_Exception('wkhtml binary does not exist at: '.$bin);
-        }
+class Wkhtml {
 
-        // Create unique temporary file
-        $uuid = uniqid('wkhtml_temp_', TRUE);
+	/**
+	 * Get an instance of the WkHTML class
+	 *
+	 * @param  string  $html  The HTML to render to a PDF
+	 * @return Wkhtml
+	 */
+	static public function factory($html)
+	{
+		if ( ! $binary = trim(`which wkhtmltopdf`))
+			throw new Kohana_Exception("wkhtmltopdf must be installed on this system");
 
-        // Store working files in cache
-        $folder = Kohana::$config->load('wkhtml.paths.temp');
+		return new Wkhtml($binary, $html);
+	}
 
-        $file_in  = $folder . $uuid . '.html';
-        $file_out = $folder . $uuid . '.pdf';
+	/**
+	 * The partial command to conver the binary
+	 */
+	protected $_command;
 
-        // Write temporary file
-        file_put_contents($file_in, $data);
+	/**
+	 * Setup the wkHTML object for actions
+	 *
+	 * @param  string  $binary The path to the wkhtmltopdb binary
+	 * @param  string  $html   The HTML to render as a PDF
+	 */
+	public function __construct($binary, $html)
+	{
+		$this->_command = strtr("echo :html | :binary -q - :save", array(
+			':binary' => $binary,
+			':html'   => escapeshellarg($html),
+		));
+	}
 
-        // Build command
-        $cmd = $bin . ' ' . escapeshellarg($file_in) . ' ' . escapeshellarg($file_out);
+	/**
+	 * Save the document as a PDF
+	 *
+	 * @return  string  The path to the new PDF
+	 */
+	public function save($path)
+	{
+		// Ensure the directory is writeable
+		if ( ! is_writable(dirname($path)))
+			throw new Kohana_Exception("Unable to save PDF, path is not writeable");
 
-        // Convert file
-        passthru($cmd);
+		// Save the PDF to the given path
+		exec(strtr($this->_command, array(':save' => $path)));
 
-        // Delete HTML file
-        unlink($file_in);
+		return $path;
+	}
 
-        // Handle any errors
-        if ( ! file_exists($file_out)) {
-            throw new Kohana_Exception('Unknown wkhtmltopdf error.');
-        }
+	/**
+	 * Render the PDF to the client browser
+	 *
+	 * @param  string  $download   Force the client to download the file
+	 * @param  string  $file_name  The default filename
+	 */
+	public function render($download = FALSE, $file_name = 'document.pdf')
+	{
+		// Get the current response
+		$response = Request::current()->response();
 
-        // Force PDF download or return cache ID
-        if ($download) {
-            $filename = (is_string($download)) ? $download : 'print.pdf';
+		// Setup the content disposition for the pdf file
+		$disposition = ($download === FALSE) ? 'inline' : 'attachment';
+		$response->headers('content-disposition', "{$disposition}; filename={$file_name}");
 
-            Request::current()->response()->send_file($file_out, $filename);
-        }
+		// Content type should always be PDF
+		$response->headers('content-type', 'application/pdf');
+		$response->send_headers();
 
-        return $file_out;
-    }
+		// Pass the output through STDOUT
+		passthru(strtr($this->_command, array(':save' => '-')));
+		exit;
+	}
+
 }
