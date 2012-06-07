@@ -54,7 +54,7 @@ class Kohana_HTML2PDF_Document {
 	 */
 	public function body($html)
 	{
-		$this->_body = $html;
+		$this->_body = (string) $html;
 
 		return $this;
 	}
@@ -68,7 +68,7 @@ class Kohana_HTML2PDF_Document {
 	public function header($html)
 	{
 		// Add the temporary header file to the options
-		$this->_options['header-html'] = $this->make_temp_file($html);
+		$this->_options['header-html'] = $this->make_temp_file((string) $html);
 
 		return $this;
 	}
