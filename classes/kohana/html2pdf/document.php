@@ -87,7 +87,8 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
-	 * Set the margin spacing on the document in millimeters
+	 * Set the margin spacing on the document in millimeters\
+	 * this may be short-handed to CSS style as well
 	 *
 	 * @param  int    $top    The top margin
 	 * @param  int    $left   The left margin
@@ -95,12 +96,34 @@ class Kohana_HTML2PDF_Document {
 	 * @param  int    $right  The right margin
 	 * @return Wkhtml
 	 */
-	public function margins($top = 10, $left = 10, $bottom = 10, $right = 10)
+	public function margins($top = NULL, $left = NULL, $bottom = NULL, $right = NULL)
 	{
-		$this->_options['margin-top']    = $top.'mm';
-		$this->_options['margin-left']   = $left.'mm';
-		$this->_options['margin-bottom'] = $bottom.'mm';
-		$this->_options['margin-right']  = $right.'mm';
+		// Set all margins to one size
+		if ($left === NULL AND $bottom === NULL AND $right === NULL)
+		{
+			$this->_options['margin-top']    = $top.'mm';
+			$this->_options['margin-left']   = $top.'mm';
+			$this->_options['margin-bottom'] = $top.'mm';
+			$this->_options['margin-right']  = $top.'mm';
+		}
+
+		// Set the top and left sizez
+		elseif ($bottom === NULL AND $right === NULL)
+		{
+			$this->_options['margin-top']    = $top.'mm';
+			$this->_options['margin-bottom'] = $top.'mm';
+			$this->_options['margin-left']   = $left.'mm';
+			$this->_options['margin-right']  = $left.'mm';
+		}
+
+		// Set all of the sides individually
+		else
+		{
+			$this->_options['margin-top']    = $top.'mm';
+			$this->_options['margin-left']   = $left.'mm';
+			$this->_options['margin-bottom'] = $bottom.'mm';
+			$this->_options['margin-right']  = $right.'mm';
+		}
 
 		return $this;
 	}
