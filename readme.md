@@ -27,11 +27,11 @@ Finally you can then render the document as a PDF two different ways. You can
 eaither save the PDF to a file on the file-system, you can render the PDF to the
 clients browser, or you can force the PDF to be downloaded by the client.
 
-   // Save to the filesystem
-   $document->save('/home/evan/document.pdf');
+    // Save to the filesystem
+    $document->save('/home/evan/document.pdf');
 
-   // Render the document to the client browser
-   $document->render(FALSE, $file_name);
+    // Render the document to the client browser
+    $document->render(FALSE, $file_name);
 
-   // Force the client to download the document
-   $document->render(TRUE, $file_name);
+    // Force the client to download the document
+    $document->render(TRUE, $file_name);
