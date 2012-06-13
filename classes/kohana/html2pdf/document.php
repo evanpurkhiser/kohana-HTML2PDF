@@ -50,7 +50,7 @@ class Kohana_HTML2PDF_Document {
 	 * Set the HTML body of the PDF
 	 *
 	 * @param  string $html The HTML string
-	 * @return Wkhtml
+	 * @return HTML2PDF_Document
 	 */
 	public function body($html)
 	{
@@ -63,7 +63,7 @@ class Kohana_HTML2PDF_Document {
 	 * Set the HTML Header for each page of the PDF
 	 *
 	 * @param  string $html  The HTML string
-	 * @return Wkhtml
+	 * @return HTML2PDF_Document
 	 */
 	public function header($html)
 	{
@@ -77,7 +77,7 @@ class Kohana_HTML2PDF_Document {
 	 * Set the space between the document header and content
 	 *
 	 * @param  int    $spacing The spacing
-	 * @return Wkhtml
+	 * @return HTML2PDF_Document
 	 */
 	public function header_spacing($spacing = 0)
 	{
@@ -94,7 +94,7 @@ class Kohana_HTML2PDF_Document {
 	 * @param  int    $left   The left margin
 	 * @param  int    $bottom The bottom margin
 	 * @param  int    $right  The right margin
-	 * @return Wkhtml
+	 * @return HTML2PDF_Document
 	 */
 	public function margins($top = NULL, $left = NULL, $bottom = NULL, $right = NULL)
 	{
