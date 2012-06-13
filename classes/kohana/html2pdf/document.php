@@ -129,6 +129,21 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
+	 * Set the page size of the document
+	 *
+	 * @link http://doc.trolltech.com/4.6/qprinter.html#PageSize-enum
+	 *
+	 * @param  string $size A valid page size
+	 * @return HTML2PDF_Document
+	 */
+	public function page_size($size)
+	{
+		$this->_options['page-size'] = $size;
+
+		return $this;
+	}
+
+	/**
 	 * Save the document as a PDF
 	 *
 	 * @param string $path Where to save the file
