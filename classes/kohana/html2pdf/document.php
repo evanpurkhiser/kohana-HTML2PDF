@@ -192,6 +192,9 @@ class Kohana_HTML2PDF_Document {
 		// Always force quiet mode
 		$this->_options['quiet'] = NULL;
 
+		// Never add an outline (http://code.google.com/p/wkhtmltopdf/issues/detail?id=600)
+		$this->_options['no-outline'] = NULL;
+
 		// Generate the options array
 		$options = array();
 
