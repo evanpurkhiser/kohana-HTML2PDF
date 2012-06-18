@@ -7,7 +7,7 @@ as a back-end to handle the conversions.
 #### Requirements
 
 You must have the [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/) static
-binary (at least version 0.11 RC1) installed onto your machine and in the PATH
+binary (at least version 0.10 RC1) installed onto your machine and in the PATH
 read by the user executing the PHP application
 
 #### Usage
