@@ -167,7 +167,7 @@ class Kohana_HTML2PDF_Document {
 	public function render($download = FALSE, $file_name = FALSE)
 	{
 		// Response::send_file() options
-		$options = array();
+		$options = array('mime_type' => 'application/pdf');
 
 		// Display the document inline
 		if ($download === FALSE)
