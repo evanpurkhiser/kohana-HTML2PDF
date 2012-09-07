@@ -204,10 +204,13 @@ class Kohana_HTML2PDF_Document {
 			$save_path = $this->make_temp_file('', 'pdf');
 		}
 
+		// Create input file. String input can fail when it's big
+		$input_file = $this->make_temp_file($this->_body);		
+		
 		// Compile the command to generate the PDF
-		$command = strtr("echo :body | :binary :options - :save", array(
+		$command = strtr(":binary :options :file :save", array(
 			':binary'  => $this->_binary,
-			':body'    => escapeshellarg($this->_body),
+			':file'    => $input_file,
 			':options' => implode(' ', $options),
 			':save'    => $save_path,
 		));
