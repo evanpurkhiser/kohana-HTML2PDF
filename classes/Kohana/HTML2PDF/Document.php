@@ -164,7 +164,7 @@ class Kohana_HTML2PDF_Document {
 	 * @param string $download  Force the client to download the file
 	 * @param string $file_name The name of the file to download
 	 */
-	public function render($download = FALSE, $file_name = FALSE)
+	public function render(Response $response, $download = FALSE, $file_name = FALSE)
 	{
 		// Response::send_file() options
 		$options = array('mime_type' => 'application/pdf');
@@ -176,9 +176,7 @@ class Kohana_HTML2PDF_Document {
 		}
 
 		// Send the PDF file to the client
-		Request::current()
-			->response()
-			->send_file($this->convert_to_pdf(), $file_name, $options);
+		$response->send_file($this->convert_to_pdf(), $file_name, $options);
 	}
 
 	/**
