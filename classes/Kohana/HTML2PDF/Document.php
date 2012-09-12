@@ -148,12 +148,20 @@ class Kohana_HTML2PDF_Document {
 	 *
 	 * @param string $path Where to save the file
 	 */
-	public function save($path)
+	public function save($path=NULL)
 	{
-		// Ensure the directory is writeable
-		if ( ! is_writable(dirname($path)))
-			throw new Kohana_Exception("Unable to save PDF, path is not writeable");
-
+		// If path supplied, ensure the directory is writeable
+		if ($path)
+		{			
+			if ( ! is_writable(dirname($path)))
+				throw new Kohana_Exception("Unable to save PDF, path is not writeable");
+		}
+		// No path supplied, use temp file
+		else
+		{
+			$path = $this->make_temp_file(NULL,'pdf');
+		}
+		
 		// Save the PDF to the given path
 		return $this->convert_to_pdf($path);
 	}
