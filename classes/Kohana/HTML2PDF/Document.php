@@ -162,26 +162,13 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
-	 * Render the PDF to the client browser
+	 * Convert the document into the PDF and return the PDF BLOB
 	 *
-	 * @param string $download  Force the client to download the file
-	 * @param string $file_name The name of the file to download
+	 * @return string
 	 */
-	public function render($download = FALSE, $file_name = FALSE)
+	public function convert()
 	{
-		// Response::send_file() options
-		$options = array('mime_type' => 'application/pdf');
-
-		// Display the document inline
-		if ($download === FALSE)
-		{
-			$options['inline'] = TRUE;
-		}
-
-		// Send the PDF file to the client
-		Request::current()
-			->response()
-			->send_file($this->convert_to_pdf(), $file_name, $options);
+		return file_get_contents($this->convert_to_pdf());
 	}
 
 	/**
