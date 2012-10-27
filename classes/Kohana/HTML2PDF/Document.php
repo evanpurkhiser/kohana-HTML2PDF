@@ -144,14 +144,17 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
-	 * Save the document as a PDF
+	 * Save the document as a PDF. If no path is specified then a temporary file
+	 * will be created and the path will be returned
+	 *
+	 * [!!] Temporary files are deleted when this document object is destroyed
 	 *
 	 * @param string $path Where to save the file
 	 */
-	public function save($path)
+	public function save($path = NULL)
 	{
 		// Ensure the directory is writeable
-		if ( ! is_writable(dirname($path)))
+		if ($path !== NULL AND ! is_writable(dirname($path)))
 			throw new Kohana_Exception("Unable to save PDF, path is not writeable");
 
 		// Save the PDF to the given path
