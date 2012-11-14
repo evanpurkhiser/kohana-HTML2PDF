@@ -144,6 +144,21 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
+	 * Set orientation to Landscape or Portrait (default Portrait)
+	 *
+	 * @link http://doc.qt.digia.com/4.6/qprinter.html#Orientation-enum
+	 *
+	 * @param  string  $orientation  A valid orientation
+	 * @return HTML2PDF_Document
+	 */
+	public function orientation($orientation)
+	{
+		$this->_options['orientation'] = $orientation;
+
+		return $this;
+	}
+
+	/**
 	 * Save the document as a PDF. If no path is specified then a temporary file
 	 * will be created and the path will be returned
 	 *
@@ -151,10 +166,10 @@ class Kohana_HTML2PDF_Document {
 	 *
 	 * @param string $path Where to save the file
 	 */
-	public function save($path = NULL)
+	public function save($path = FALSE)
 	{
 		// Ensure the directory is writeable
-		if ($path !== NULL AND ! is_writable(dirname($path)))
+		if ($path !== FALSE AND ! is_writable(dirname($path)))
 			throw new Kohana_Exception("Unable to save PDF, path is not writeable");
 
 		// Save the PDF to the given path
