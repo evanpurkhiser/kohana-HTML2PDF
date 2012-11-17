@@ -144,6 +144,21 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
+	 * Set orientation to Landscape or Portrait (default Portrait)
+	 *
+	 * @link http://doc.qt.digia.com/4.6/qprinter.html#Orientation-enum
+	 *
+	 * @param  string  $orientation  A valid orientation
+	 * @return HTML2PDF_Document
+	 */
+	public function orientation($orientation)
+	{
+		$this->_options['orientation'] = $orientation;
+
+		return $this;
+	}
+
+	/**
 	 * Save the document as a PDF. If no path is specified then a temporary file
 	 * will be created and the path will be returned
 	 *
