@@ -1,3 +1,6 @@
+*Note: This readme is slightly out of date! It's probably best to just look at the 
+`HTML2PDF_Document` class to see how things work. It's pretty straightforward!*
+
 ### HTML2PDF Document converter
 
 HTML2PDF is a Kohana 3.x module that can be used to convert a HTML document into
