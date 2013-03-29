@@ -159,6 +159,30 @@ class Kohana_HTML2PDF_Document {
 	}
 
 	/**
+	 * Set whether to disable javascript parsing (default not disabled)
+	 *
+	 * @param  boolean  $disable_javascript
+	 * @return HTML2PDF_Document
+	 */
+	public function disable_javascript($disable_javascript=FALSE)
+	{
+		// Disable javascript
+		if ($disable_javascript)
+		{
+			// Set option to NULL as it has no arguments
+			$this->_options['disable-javascript'] = NULL;
+		}
+		// Do not disable javascript
+		else
+		{
+			// Unset the option
+			unset($this->_options['disable-javascript']);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Save the document as a PDF. If no path is specified then a temporary file
 	 * will be created and the path will be returned
 	 *
