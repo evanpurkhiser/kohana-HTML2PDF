@@ -1,6 +1,3 @@
-*Note: This readme is slightly out of date! It's probably best to just look at the 
-`HTML2PDF_Document` class to see how things work. It's pretty straightforward!*
-
 ### HTML2PDF Document converter
 
 HTML2PDF is a Kohana 3.x module that can be used to convert a HTML document into
@@ -26,15 +23,17 @@ From here you can apply some different formatting options to the document includ
  * `$document->header_spacing($spacing)` - Set the spacing between the content and header
  * `$document->margins($top, $left, $bottom, $right)` - Set the margins for the document (in millimeters)
 
+See the [class itself](classes/Kohana/HTML2PDF/Document.php) for all the available methods.
+
 Finally you can then render the document as a PDF two different ways. You can
-eaither save the PDF to a file on the file-system, you can render the PDF to the
-clients browser, or you can force the PDF to be downloaded by the client.
+eaither save the PDF to a file on the file-system, or you can convert the PDF
+and have the PDF BLOB returned.
 
     // Save to the filesystem
     $document->save('/home/evan/document.pdf');
 
-    // Render the document to the client browser
-    $document->render(FALSE, $file_name);
+    // Save to filesystem and return temporary file path
+    $temp_path = $document->save();
 
-    // Force the client to download the document
-    $document->render(TRUE, $file_name);
+    // Convert and put the BLOB into a variable
+    $pdf_blob = $document->convert();
