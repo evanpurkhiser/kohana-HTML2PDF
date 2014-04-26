@@ -11,7 +11,8 @@
 		}
 	],
 	"require": {
-		"php": ">= 5.2.4"
+		"php"         : ">=5.2.4",
+		"kohana/core" : "3.3.*"
 	},
 	"extra": {
 		"branch-alias": {
