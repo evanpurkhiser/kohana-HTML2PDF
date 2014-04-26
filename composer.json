@@ -1,17 +1,16 @@
 {
-    "name": "evanpurkhiser/kohana-html2pdf",
-	"type": "kohana-module",
-    "description": "A Kohana module to convert HTML to a PDF document using wkhtmltopdf as the conversion backend",
+	"name": "evanpurkhiser/kohana-html2pdf",
+	"description": "A Kohana module to convert HTML to a PDF document using wkhtmltopdf as the conversion backend",
 	"homepage": "https://github.com/EvanPurkhiser/kohana-HTML2PDF",
 	"keywords": ["kohana", "pdf", "wkhtmltopdf"],
-    "authors": [
-        {
-            "name": "Evan Purkhiser",
-            "email": "evanpurkhiser@gmail.com"
-        }
-    ],
-    "require": {
-		"composer/installers" : "~1.0",
-		"kohana/core"         : ">=3.3"
-    }
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Evan Purkhiser",
+			"email": "evanpurkhiser@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">= 5.2.4"
+	}
 }
