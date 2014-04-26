@@ -164,7 +164,7 @@ class Kohana_HTML2PDF_Document {
 	 * @param  boolean  $disable_javascript
 	 * @return HTML2PDF_Document
 	 */
-	public function disable_javascript($disable_javascript=FALSE)
+	public function disable_javascript($disable_javascript = FALSE)
 	{
 		// Disable javascript
 		if ($disable_javascript)
