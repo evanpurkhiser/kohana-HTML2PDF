@@ -278,7 +278,7 @@ class Kohana_HTML2PDF_Document {
 		// Throw an exception if we returned with a non-zero value
 		if (trim(proc_close($resource)))
 			throw new Kohana_Exception(':error [:options]', array(
-				':error'   => strstr($output[2], "\n", TRUE),
+				':error'   => $output[2],
 				':options' => implode(', ', $options),
 			));
 
